@@ -161,6 +161,105 @@ The modular architecture allows for various extensions:
    - Support more structured data formats (XML, CSV)
    - Add export functionality to databases
 
+
+## Contributing
+
+Contributions are welcome! Please follow the [contribution guidelines](CONTRIBUTING.md) and open an issue or pull request for any enhancements or fixes.
+
+## Acknowledgments
+
+- [SmolDocling](https://github.com/google/smoldocling) for OCR and document parsing
+
+- [Mistral](https://huggingface.co/mistralai/Mistral-7B-Instruct-v1.0) for document structuring
+
+- [FAISS](https://github.com/facebookresearch/faiss) for vector storage and retrieval
+
+- [Gemma 3](https://github.com/google/gemma3) for analysis and question answering
+
+- [Claude](https://github.com/claudeai/claude) for alternative structuring
+
+# DocuMind Pipeline
+
+DocuMind is a modular pipeline designed to process documents and answer questions. It leverages various agents to handle different stages of the document processing workflow.
+
+## Overview
+
+The pipeline consists of the following agents:
+
+1. **Smol Agent**: OCR and document parsing using SmolDocling.
+2. **Mistral Agent**: Structuring the document using Mistral.
+3. **RAG Agent**: Storage and retrieval of document embeddings.
+4. **Gemma Agent**: Analysis and answering of questions.
+
+## Usage
+
+To use the pipeline, follow these steps:
+
+1. Initialize the pipeline. This will set up the agents and their dependencies.
+2. Process a document by calling the `process_document` method.
+3. Answer a question by calling the `answer_question` method.
+
+```python
+from main import DocuMindPipeline
+
+# Initialize the pipeline
+pipeline = DocuMindPipeline()
+
+# Process a document
+file_path = "path/to/document.pdf"
+pipeline.process_document(file_path)
+
+# Answer a question
+question = "What is the total number of pages in the document?"
+answer = pipeline.answer_question(question)
+print(answer)
+```
+
+## Customization
+
+You can customize the pipeline by adding or modifying agents. For example, to add a specialized agent for a specific document type, you can create a new agent class and register it with the pipeline.
+
+```python
+from main import DocuMindPipeline
+
+# Custom agent class
+class CustomAgent:
+    def __init__(self, pipeline):
+        self.pipeline = pipeline
+
+    def process_document(self, file_path):
+        # Custom processing logic
+        pass
+
+    def answer_question(self, question):
+        # Custom answering logic
+        pass
+
+# Register the custom agent with the pipeline
+pipeline = DocuMindPipeline()
+pipeline.register_agent("custom", CustomAgent)
+
+# Process a document using the custom agent
+file_path = "path/to/document.pdf"
+pipeline.process_document(file_path)
+
+# Answer a question using the custom agent
+question = "What is the answer to the question?"
+answer = pipeline.answer_question(question)
+print(answer)
+```
+
+## Integration
+
+You can integrate the pipeline with other applications by using the `DocuMindPipeline` class. For example, you can use it in a web application or a desktop application.
+
+```python
+from main import DocuMindPipeline
+
+# Initialize the pipeline
+pipeline = DocuMindPipeline()
+```
+
 ## License
 
-Apache License
+Apache License 2.0
