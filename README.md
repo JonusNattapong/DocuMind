@@ -163,4 +163,4 @@ The modular architecture allows for various extensions:
 
 ## License
 
-MIT
+Apache License
